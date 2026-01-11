@@ -65,3 +65,64 @@ void dodajDinozaura() {
     baza[liczba++] = d;
     printf("Dinozaur dodany pomyslnie.\n");
 }
+
+void wyswietlDinozaura(Dinozaur d) {
+    printf("\nGatunek: %s\n", d.gatunek);
+    printf("Dieta: %s\n", d.dieta);
+    printf("Masa: %.2f kg\n", d.masa);
+    printf("Zagroda: %s\n", d.zagroda);
+    printf("Temperament: %s\n", d.temperament);
+    printf("Status: %s\n", d.status);
+}
+
+void wyszukajDinozaura() {
+    char gatunek[MAX_STR], zagroda[MAX_STR];
+
+    printf("Podaj gatunek: ");
+    wczytajLinie(gatunek, MAX_STR);
+
+    printf("Podaj zagrode: ");
+    wczytajLinie(zagroda, MAX_STR);
+
+    for (int i = 0; i < liczba; i++) {
+        if (strcmp(baza[i].gatunek, gatunek) == 0 &&
+            strcmp(baza[i].zagroda, zagroda) == 0) {
+            wyswietlDinozaura(baza[i]);
+            return;
+        }
+    }
+    printf("Nie znaleziono dinozaura.\n");
+}
+
+void modyfikujDinozaura() {
+    char gatunek[MAX_STR], zagroda[MAX_STR];
+
+    printf("Podaj gatunek: ");
+    wczytajLinie(gatunek, MAX_STR);
+
+    printf("Podaj zagrode: ");
+    wczytajLinie(zagroda, MAX_STR);
+
+    for (int i = 0; i < liczba; i++) {
+        if (strcmp(baza[i].gatunek, gatunek) == 0 &&
+            strcmp(baza[i].zagroda, zagroda) == 0) {
+
+            printf("Nowa dieta: ");
+            wczytajLinie(baza[i].dieta, MAX_STR);
+
+            printf("Nowa masa: ");
+            scanf("%f", &baza[i].masa);
+            czyscBufor();
+
+            printf("Nowy temperament: ");
+            wczytajLinie(baza[i].temperament, MAX_STR);
+
+            printf("Nowy status: ");
+            wczytajLinie(baza[i].status, MAX_STR);
+
+            printf("Dane zmodyfikowane.\n");
+            return;
+        }
+    }
+    printf("Nie znaleziono dinozaura.\n");
+}
