@@ -126,3 +126,53 @@ void modyfikujDinozaura() {
     }
     printf("Nie znaleziono dinozaura.\n");
 }
+
+void usunDinozaura() {
+    char gatunek[MAX_STR], zagroda[MAX_STR];
+
+    printf("Podaj gatunek: ");
+    wczytajLinie(gatunek, MAX_STR);
+
+    printf("Podaj zagrode: ");
+    wczytajLinie(zagroda, MAX_STR);
+
+    for (int i = 0; i < liczba; i++) {
+        if (strcmp(baza[i].gatunek, gatunek) == 0 &&
+            strcmp(baza[i].zagroda, zagroda) == 0) {
+
+            if (strcmp(baza[i].status, "zagrozenie") == 0 ||
+                strcmp(baza[i].status, "ucieczka") == 0) {
+                printf("Nie mozna usunac dinozaura — status krytyczny!\n");
+                return;
+            }
+
+            for (int j = i; j < liczba - 1; j++) {
+                baza[j] = baza[j + 1];
+            }
+            liczba--;
+            printf("Dinozaur usuniety.\n");
+            return;
+        }
+    }
+    printf("Nie znaleziono dinozaura.\n");
+}
+
+void sortujPoMasie() {
+    for (int i = 0; i < liczba - 1; i++) {
+        for (int j = 0; j < liczba - i - 1; j++) {
+            if (baza[j].masa > baza[j + 1].masa) {
+                Dinozaur tmp = baza[j];
+                baza[j] = baza[j + 1];
+                baza[j + 1] = tmp;
+            }
+        }
+    }
+    printf("Posortowano po masie.\n");
+}
+
+void zapiszDoPliku() {
+    FILE *f = fopen("dinozaury.txt", "w");
+    if (!f) {
+        printf("Blad zapisu do pliku.\n");
+        return;
+    }
