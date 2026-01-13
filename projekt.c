@@ -176,3 +176,17 @@ void zapiszDoPliku() {
         printf("Blad zapisu do pliku.\n");
         return;
     }
+
+        fprintf(f, "%d\n", liczba);
+    for (int i = 0; i < liczba; i++) {
+        fprintf(f, "%s\n%s\n%f\n%s\n%s\n%s\n",
+                baza[i].gatunek,
+                baza[i].dieta,
+                baza[i].masa,
+                baza[i].zagroda,
+                baza[i].temperament,
+                baza[i].status);
+    }
+    fclose(f);
+    printf("Zapisano do pliku.\n");
+}
