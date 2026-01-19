@@ -190,3 +190,62 @@ void zapiszDoPliku() {
     fclose(f);
     printf("Zapisano do pliku.\n");
 }
+
+void wczytajZPliku() {
+    FILE *f = fopen("dinozaury.txt", "r");
+    if (!f) {
+        printf("Brak pliku do odczytu.\n");
+        return;
+    }
+
+    fscanf(f, "%d\n", &liczba);
+    for (int i = 0; i < liczba; i++) {
+        fgets(baza[i].gatunek, MAX_STR, f);
+        fgets(baza[i].dieta, MAX_STR, f);
+        fscanf(f, "%f\n", &baza[i].masa);
+        fgets(baza[i].zagroda, MAX_STR, f);
+        fgets(baza[i].temperament, MAX_STR, f);
+        fgets(baza[i].status, MAX_STR, f);
+
+        baza[i].gatunek[strcspn(baza[i].gatunek, "\n")] = 0;
+        baza[i].dieta[strcspn(baza[i].dieta, "\n")] = 0;
+        baza[i].zagroda[strcspn(baza[i].zagroda, "\n")] = 0;
+        baza[i].temperament[strcspn(baza[i].temperament, "\n")] = 0;
+        baza[i].status[strcspn(baza[i].status, "\n")] = 0;
+    }
+    fclose(f);
+    printf("Dane wczytane z pliku.\n");
+}
+
+int main() {
+    int wybor;
+
+    do {
+        printf("\n--- PARK DINOZAUROW ---\n");
+        printf("1. Dodaj dinozaura\n");
+        printf("2. Wyszukaj dinozaura\n");
+        printf("3. Modyfikuj dinozaura\n");
+        printf("4. Usun dinozaura\n");
+        printf("5. Sortuj po masie\n");
+        printf("6. Zapisz do pliku\n");
+        printf("7. Wczytaj z pliku\n");
+        printf("0. Wyjscie\n");
+        printf("Wybor: ");
+        scanf("%d", &wybor);
+        czyscBufor();
+
+        switch (wybor) {
+            case 1: dodajDinozaura(); break;
+            case 2: wyszukajDinozaura(); break;
+            case 3: modyfikujDinozaura(); break;
+            case 4: usunDinozaura(); break;
+            case 5: sortujPoMasie(); break;
+            case 6: zapiszDoPliku(); break;
+            case 7: wczytajZPliku(); break;
+            case 0: printf("Zamykanie systemu...\n"); break;
+            default: printf("Nieprawidlowy wybor.\n");
+        }
+    } while (wybor != 0);
+
+    return 0;
+}
