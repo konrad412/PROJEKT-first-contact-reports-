@@ -107,17 +107,17 @@ void modyfikujDinozaura() {
         if (strcmp(baza[i].gatunek, gatunek) == 0 &&
             strcmp(baza[i].zagroda, zagroda) == 0) {
 
-            printf("Nowa dieta: ");
+            printf("Nowa dieta(miesozerny/roslinozerny/wszystkozerny): ");
             wczytajLinie(baza[i].dieta, MAX_STR);
 
-            printf("Nowa masa: ");
+            printf("Nowa masa(kg): ");
             scanf("%f", &baza[i].masa);
             czyscBufor();
 
-            printf("Nowy temperament: ");
+            printf("Nowy temperament(spokojny, reaktywny, agresywny, nieprzewidywalny): ");
             wczytajLinie(baza[i].temperament, MAX_STR);
 
-            printf("Nowy status: ");
+            printf("Nowy status(bezpieczny, pod obserwacja, zagrozenie, ucieczka, awaryjna kwarantanna): ");
             wczytajLinie(baza[i].status, MAX_STR);
 
             printf("Dane zmodyfikowane.\n");
